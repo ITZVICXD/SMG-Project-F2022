@@ -1,15 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
-</head>
-<body>
-    <div>
-        <h1>Welcome to the Regristration page</h1>
-    </div>
+{% extends "base.HTML" %}
+{% block title %}Register{% endblock %}
+{% block pageContent %}
+<h1>Welcome to the Registration Page</h1>
+<form method="POST">
+    <h3 align="center">Register Here</h3>
     
-</body>
-</html>
+</form>
+{% endblock %}

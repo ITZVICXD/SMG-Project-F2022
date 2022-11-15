@@ -1,13 +1,16 @@
+{% extends "base.HTML" %}
 <!DOCTYPE html>
 <html lang="en">
 
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <title>tailwind Calendar</title>
+        {% block title %}Calendar{% endblock %}
+        {% block links %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/1.7.3/tailwind.min.css">
+        {% endblock %}
     </head>
-
+    {% block pageContent%}
     <body class="bg-gray-200">
         <div class="container mx-auto mt-10">
             <div class="wrapper bg-white rounded shadow w-full ">
@@ -477,5 +480,5 @@
             </div>
         </div>
     </body>
-
+{% endblock %}
 </html>

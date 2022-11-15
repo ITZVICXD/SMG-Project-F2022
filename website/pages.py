@@ -6,8 +6,10 @@ pages = Blueprint('pages', __name__)
 def home():
     return render_template("home.HTML")
 
+@pages.route("/Calendar")
+def calendar():
+    return render_template("syncCalendar.HTML")
+
 @pages.route("/Profile")#In order to use must url must be /Home/profile?name=EnterNameHere
 def profile():
-    args = request.args
-    name = args.get('name')
-    return render_template("profile.HTML", name=name)
+    return render_template("profile.HTML")

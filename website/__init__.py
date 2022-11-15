@@ -1,13 +1,22 @@
-from flask import Flask
+from flask import Flask, render_template, request, url_for, redirect
+from flask_sqlalchemy import SQLAlchemy
+import os
+from flask_login import LoginManager
+from sqlalchemy.sql import func
 
-def create_app():
-    app = Flask(__name__)
-    app.config['SECRET_KEY']='thesecret Key'
 
-    from .pages import pages
-    from .auth import auth
 
-    app.register_blueprint(pages, url_prefix='/')
-    app.register_blueprint(auth, url_prefix='/')
+basedir = os.path.abspath(os.path.dirname(__file__))
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'blah blah blah'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir,'test.db')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    return app
+
+db = SQLAlchemy(app)
+
+from .auth import auth
+from .pages import pages
+
+app.register_blueprint(pages, url_prefix='/')
+app.register_blueprint(auth, url_prefix='/')

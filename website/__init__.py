@@ -20,3 +20,13 @@ from .pages import pages
 
 app.register_blueprint(pages, url_prefix='/')
 app.register_blueprint(auth, url_prefix='/')
+
+from .models import User
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(id):
+    return User.query.get(int(id))

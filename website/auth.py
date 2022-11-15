@@ -1,16 +1,33 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for, g, session
 from .models import User, db
 from website import app
+from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 auth = Blueprint('auth', __name__)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template("Login.HTML")
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+           if check_password_hash(user.password, password):
+            flash('Log In Successful!', category='success')
+           else:
+                flash('Incorrect password, try again', category='error')
+        else:
+            flash('Email Does Not Exist', category='error')
+        
+    return render_template("Login.HTML", user=current_user)
+
 @auth.route('/logout')
 def logout():
-     return redirect(url_for('pages.home'))
+    logout_user()
+    flash('Logout Successful', category='success')
+    return redirect(url_for('auth.login'))
      
 @auth.route('/Register', methods=['GET', 'POST'])
 def Register():

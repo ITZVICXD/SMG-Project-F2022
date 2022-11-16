@@ -15,3 +15,6 @@ def calendar():
 @pages.route("/Profile")#In order to use must url must be /Home/profile?name=EnterNameHere
 def profile():
     return render_template("profile.HTML")
+@pages.route("/Transcript Reader")
+def TR():
+    return render_template("TR.HTML")

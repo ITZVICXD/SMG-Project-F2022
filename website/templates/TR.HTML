@@ -1,0 +1,9 @@
+{% extends "base.HTML" %}
+{% block title %}Transcript Reader{% endblock %}
+{% block pageContent %}
+<h1>Choose Transcript File</h1>
+<form action="/action_page.php">
+    <input type="file" id="myFile" name="filename">
+    <input type="submit">
+  </form>
+{% endblock %}

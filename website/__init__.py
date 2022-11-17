@@ -12,9 +12,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 
 def create_app():
-    
-
-
     db = SQLAlchemy(app)
 
     from .auth import auth
@@ -30,6 +27,6 @@ def create_app():
     login_manager.login_view = 'login'
 
     @login_manager.user_loader
-    def load_user(id):
-        return User.query.get(int(id))
+    def load_user(user_id):
+        return User.query.get(user_id)
     return app

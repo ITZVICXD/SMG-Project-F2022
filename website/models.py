@@ -11,7 +11,7 @@ from website import app
 
 db = SQLAlchemy(app)
 
-class User(db.Model):
+class User(UserMixin, db.Model):
     __tablename__ = "user"
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(150))
@@ -24,8 +24,21 @@ class User(db.Model):
         self.last_name = last_name
         self.email = email
         self.password = password
+    
+    def is_active(self):
+        return True
+    
+    def is_authenticated(self):
+        return self.authenticated
+    
+    def get_id(self):
+        return self.email
+    
+    def is_anonymous(self):
+        return False
 
 with app.app_context():
+    from . import auth 
     db.create_all()
 
 

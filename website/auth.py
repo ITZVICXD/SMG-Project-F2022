@@ -16,6 +16,11 @@ def login():
         if user:
            if check_password_hash(user.password, password):
             flash('Log In Successful!', category='success')
+            user.authenticated = True
+            db.session.add(user)
+            db.session.commit()
+            login_user(user, remember=True)
+            return redirect(url_for('pages.home'))
            else:
                 flash('Incorrect password, try again', category='error')
         else:

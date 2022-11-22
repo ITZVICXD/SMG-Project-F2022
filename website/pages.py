@@ -16,7 +16,7 @@ def home():
 
 @pages.route("/Calendar")
 def calendar():
-    return render_template("syncCalendar.HTML")
+    return render_template("syncCalendar.HTML", user=current_user)
 
 @pages.route("/Profile")#In order to use must url must be /Home/profile?name=EnterNameHere
 def profile():
